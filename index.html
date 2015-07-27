@@ -12,7 +12,8 @@
 	<!-- Google Maps JavaScript API and Style -->
 	<style>
 	html, body, #map-canvas {
-		height: 500px;
+		height: 450px;
+		width: 100%;
 		margin: 0;
 		padding: 0;
 	}
@@ -21,23 +22,29 @@
 </head>
 
 <body class="container">
-	<div class="col=lg-8">
-		<div class="form-group">
-			<input class="input-lg" style="width: 100%; margin-top: 20px" data-bind="value: location" placeholder="Search restaurant name or address">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="form-group">
+				<input class="input-lg" style="width: 100%; margin-top: 20px" data-bind="value: location" placeholder="Search restaurant name or address">
+			</div>
+<!-- 			<p class="input-lg">Your search location is <span data-bind='text: location'> </span></p> -->
 		</div>
-		<p class="input-lg">Your search location is <span data-bind='text: location'> </span></p>
 	</div>
 
-	<h4>Top 10 Ramen Places in San Francisco</h4>
-	<ul data-bind="foreach: restaurants">
-		<li class="md-col-8">
-			<span data-bind="text: name"> </span> on
-			<span data-bind="text: address"> </span>
-		</li>
-	</ul>
+	<div class="row">
+		<h4>Top Ramen Places in San Francisco</h4>
+		<ul data-bind="foreach: restaurants">
+			<li class="md-col-8">
+				<span data-bind="text: name"> </span> on
+				<span data-bind="text: address"> </span>
+			</li>
+		</ul>
+	</div>
 
 	<!-- Display Google Maps -->
-	<div id="map-canvas"></div>
+	<div class="row">
+		<div id="map-canvas" class="col-md-12"></div>
+	</div>
 
 	<!-- jQuery and KnockoutJS -->
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>

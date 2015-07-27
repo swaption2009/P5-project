@@ -8,14 +8,23 @@
 
 	<!-- Bootstrap -->
 	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="container">
+	<div class="form-group">
+		<label>Enter Location:</label>
+		<input type="text" class="form-control" data-bind="value: location">
+	</div>
+	<div>
+		<h3 class="col-md-12">Your current location is <span data-bind='text: location'> </span>!</h3>  
+	</div>
 
 	<!-- jQuery and KnockoutJS -->
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="bower_components/knockout/dist/knockout-3.3.0.js"></script>
-</head>
+	<script type="text/javascript" src="bower_components/knockout/dist/knockout.js"></script>
+	<!-- apps.js -->
+	<script type="text/javascript" src="apps.js"></script>
 
-<body>
-	
 </body>
 
 </html>

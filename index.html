@@ -8,6 +8,26 @@
 
 	<!-- Bootstrap -->
 	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Google Maps JavaScript API and Style -->
+	<style>
+	html, body, #map-canvas {
+		height: 500px;
+		margin: 0;
+		padding: 0;
+	}
+	</style>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJrU5NhnJmfvfSJ-VwDL4oWs2WzXIddMI"></script>
+	<script>
+		var map;
+		function initialize() {
+		  map = new google.maps.Map(document.getElementById('map-canvas'), {
+		    zoom: 13,
+		    center: {lat: 37.7833, lng: -122.4167}
+		  });
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 </head>
 
 <body class="container">
@@ -20,18 +40,20 @@
 
 	<h4>Top 10 Ramen Places in San Francisco</h4>
 	<ul data-bind="foreach: Restaurants">
-		<li>
+		<li class="md-col-8">
 			<span data-bind="text: name"> </span> on
 			<span data-bind="text: address"> </span>
 		</li>
 	</ul>
+
+	<!-- Display Google Maps -->
+	<div id="map-canvas"></div>
 
 	<!-- jQuery and KnockoutJS -->
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="bower_components/knockout/dist/knockout.js"></script>
 	<!-- apps.js -->
 	<script type="text/javascript" src="apps.js"></script>
-
 </body>
 
 </html>

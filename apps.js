@@ -1,35 +1,36 @@
 // Knockout Custom Binding for Google Maps
 function point(name, lat, long) {
-    this.name = name;
-    this.lat = ko.observable(lat);
-    this.long = ko.observable(long);
+	var self = this;
+	self.name = name;
+	self.lat = ko.observable(lat);
+	self.long = ko.observable(long);
 
-    var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(lat, long),
-        title: name,
-        map: map,
-        draggable: true
-    });
+	var marker = new google.maps.Marker({
+		position: new google.maps.LatLng(lat, long),
+		title: name,
+		map: map,
+		draggable: true
+	});
 
-    //if you need the poition while dragging
-    google.maps.event.addListener(marker, 'drag', function() {
-        var pos = marker.getPosition();
-        this.lat(pos.lat());
-        this.long(pos.lng());
-    }.bind(this));
+	//if you need the poition while dragging
+	google.maps.event.addListener(marker, 'drag', function() {
+		var pos = marker.getPosition();
+		self.lat(pos.lat());
+		self.long(pos.lng());
+	}.bind(self));
 
-    //if you just need to update it when the user is done dragging
-    google.maps.event.addListener(marker, 'dragend', function() {
-        var pos = marker.getPosition();
-        this.lat(pos.lat());
-        this.long(pos.lng());
-    }.bind(this));
+	//if you just need to update it when the user is done dragging
+	google.maps.event.addListener(marker, 'dragend', function() {
+		var pos = marker.getPosition();
+		self.lat(pos.lat());
+		self.long(pos.lng());
+	}.bind(self));
 }
 
 var map = new google.maps.Map(document.getElementById('map-canvas'), {
-    zoom: 13,
-    center: new google.maps.LatLng(37.7833, -122.4167),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+	zoom: 13,
+	center: new google.maps.LatLng(37.7833, -122.4167),
+	mapTypeId: google.maps.MapTypeId.ROADMAP
 });
 
 
@@ -45,16 +46,16 @@ var ViewModel = function() {
 
 	// Non-editable data from server
 	self.Restaurants = ko.observableArray([
-		{"name":"Katana-Ya", "address":"430 Geary St, San Francisco, CA 94102"},
-		{"name":"Izakaya Sozai", "address":"1500 Irving St, San Francisco, CA 94122"},
-		{"name":"Genki Ramen","address": "3944 Geary Blvd, San Francisco, CA 94118"},
-		{"name":"Tanpopo", "address":"1740 Buchanan St, San Francisco, CA 94115"},
-		{"name":"Suzu Noodle House", "address":"1825 Post St, San Francisco, CA 94115"},
-		{"name":"Saiwaii Ramen","address": "2240 Irving St, San Francisco, CA 94122"},
-		{"name":"Mifune Restaurant", "address":"1737 Post St, San Francisco, CA 94115"},
-		{"name":"Ajizen Ramen", "address":"865 Market St, San Francisco, CA 94103"},
-		{"name":"Ken Ken Ramen","address": "3378 18th St, San Francisco, CA 94110"},
-		{"name":"Ramen Yamadaya","address": "1728 Buchanan St, San Francisco, CA 94115"}
+		{"name":"Katana-Ya", "address":"430 Geary St.", "lat":"37.787285", "long":"-122.410464"},
+		{"name":"Izakaya Sozai", "address":"1500 Irving St.", "lat":"37.763847", "long":"-122.474121"},
+		{"name":"Genki Ramen","address": "3944 Geary Blvd.", "lat":"37.781361", "long":"-122.461898"},
+		{"name":"Tanpopo", "address":"1740 Buchanan St.", "lat":"37.786186", "long":"-122.429676"},
+		{"name":"Suzu Noodle House", "address":"1825 Post St.", "lat":"37.784942", "long":"-122.432057"},
+		{"name":"Saiwaii Ramen","address": "2240 Irving St.", "lat":"37.763520", "long":"-122.482179"},
+		{"name":"Mifune Restaurant", "address":"1737 Post St.", "lat":"37.785325", "long":"-122.430269"},
+		{"name":"Ajizen Ramen", "address":"865 Market St.", "lat":"37.783951", "long":"-122.407162"},
+		{"name":"Ken Ken Ramen","address": "3378 18th St.", "lat":"37.762103", "long":"-122.418744"},
+		{"name":"Ramen Yamadaya","address": "1728 Buchanan St.", "lat":"37.786067", "long":"-122.429653"}
 	]);
 
 	// alert('The length of the array is ' + myLocations().length);
@@ -62,8 +63,8 @@ var ViewModel = function() {
 
 	self.location = ko.observable();
 
-	this.searchLocation = ko.computed(function() {
-		return this.location;
+	self.searchLocation = ko.computed(function() {
+		return self.location;
 	}, this);
 };
 

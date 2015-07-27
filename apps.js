@@ -62,7 +62,7 @@ var ViewModel = function() {
 
 	self.location = ko.observable();
 
-	this.showLocations = ko.computed(function() {
+	this.searchLocation = ko.computed(function() {
 		return this.location;
 	}, this);
 };

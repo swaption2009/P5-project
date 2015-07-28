@@ -11,36 +11,37 @@ var myList = [
 	{"name":"Ken Ken Ramen","address": "3378 18th St.", "lat":"37.762103", "long":"-122.418744"},
 	{"name":"Ramen Yamadaya","address": "1728 Buchanan St.", "lat":"37.786067", "long":"-122.429653"}
 ];
+// console.log(myList);
 
 // Restaurant model for Google Maps JS API
-function restaurant(myList) {
-	var self = this;
-	self.name = myList.name;
-	self.address = myList.address;
-	self.lat = myList.ko.observable(lat);
-	self.long = myList.ko.observable(long);
+// function restaurant(name, address, lat, long) {
+// 	var self = this;
+// 	self.name = name;
+// 	self.address = address;
+// 	self.lat = ko.observable(lat);
+// 	self.long = ko.observable(long);
 
-	var marker = new google.maps.Marker({
-		position: new google.maps.LatLng(lat, long),
-		title: name,
-		map: map,
-		draggable: true
-	});
+// 	var marker = new google.maps.Marker({
+// 		position: new google.maps.LatLng(lat, long),
+// 		title: name,
+// 		map: map,
+// 		draggable: true
+// 	});
 
-	//Make maps dragable
-	google.maps.event.addListener(marker, 'drag', function() {
-		var pos = marker.getPosition();
-		self.lat(pos.lat());
-		self.long(pos.lng());
-	}.bind(self));
+// 	//Make maps dragable
+// 	google.maps.event.addListener(marker, 'drag', function() {
+// 		var pos = marker.getPosition();
+// 		self.lat(pos.lat());
+// 		self.long(pos.lng());
+// 	}.bind(self));
 
-	//Update maps when the user is done dragging
-	google.maps.event.addListener(marker, 'dragend', function() {
-		var pos = marker.getPosition();
-		self.lat(pos.lat());
-		self.long(pos.lng());
-	}.bind(self));
-}
+// 	//Update maps when the user is done dragging
+// 	google.maps.event.addListener(marker, 'dragend', function() {
+// 		var pos = marker.getPosition();
+// 		self.lat(pos.lat());
+// 		self.long(pos.lng());
+// 	}.bind(self));
+// }
 
 var map = new google.maps.Map(document.getElementById('map-canvas'), {
 	zoom: 13,
@@ -56,7 +57,40 @@ var ViewModel = function() {
 	// Preliminary data
 	var restaurants = ko.observableArray();
 	self.restaurants = ko.observableArray(myList);
-	console.log(restaurants[0]);
+	console.log(self.restaurants()[0].name); // result: "Katana-Ya"
+	console.log(self.restaurants().length); // result: 10
+
+	self.query = ko.observable(" ");
+
+	for (var i = 0; i < self.restaurants().length; i ++) {
+		// console.log(self.restaurants()[i].lat);
+		// console.log(self.restaurants()[i].long);
+		var lat = self.restaurants()[i].lat;
+		var long = self.restaurants()[i].long;
+
+		// start Google Map marker
+		var marker = new google.maps.Marker({
+			position: new google.maps.LatLng(lat, long),
+			title: name,
+			map: map,
+			draggable: true
+		});
+
+		//Make maps dragable
+		google.maps.event.addListener(marker, 'drag', function() {
+			var pos = marker.getPosition();
+			self.lat(pos.lat());
+			self.long(pos.lng());
+		}.bind(self));
+
+		//Update maps when the user is done dragging
+		google.maps.event.addListener(marker, 'dragend', function() {
+			var pos = marker.getPosition();
+			self.lat(pos.lat());
+			self.long(pos.lng());
+		}.bind(self));
+
+	}
 
 	// Preliminary data
 	// self.restaurants = ko.observableArray([
@@ -72,11 +106,11 @@ var ViewModel = function() {
 	// 	new restaurant("Ramen Yamadaya", "1728 Buchanan St.", 37.786067, -122.429653)
 	// ]);
 
-	self.location = ko.observable();
-
-	self.searchLocation = ko.computed(function() {
-		return self.location;
-	}, this);
+	// Unused textInput binding
+	// self.location = ko.observable();
+	// self.searchLocation = ko.computed(function() {
+	// 	return self.location;
+	// }, this);
 };
 
 // Initiate KnockoutJS

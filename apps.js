@@ -1,4 +1,4 @@
-// Restaurant model
+// Restaurant model for Google Maps JS API
 function restaurant(name, address, lat, long) {
 	var self = this;
 	self.name = name;
@@ -13,14 +13,14 @@ function restaurant(name, address, lat, long) {
 		draggable: true
 	});
 
-	//if you need the poition while dragging
+	//Make maps dragable
 	google.maps.event.addListener(marker, 'drag', function() {
 		var pos = marker.getPosition();
 		self.lat(pos.lat());
 		self.long(pos.lng());
 	}.bind(self));
 
-	//if you just need to update it when the user is done dragging
+	//Update maps when the user is done dragging
 	google.maps.event.addListener(marker, 'dragend', function() {
 		var pos = marker.getPosition();
 		self.lat(pos.lat());

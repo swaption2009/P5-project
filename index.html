@@ -21,29 +21,33 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJrU5NhnJmfvfSJ-VwDL4oWs2WzXIddMI"></script>
 </head>
 
-<body class="container">
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="form-group">
-				<input class="input-lg" style="width: 100%; margin-top: 20px" data-bind="value: query" placeholder="Search restaurant name or address">
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="form-group">
+					<input class="input-lg" style="width: 100%; margin-top: 20px" data-bind="value: query" placeholder="Search restaurant name or address">
+				</div>
+				<p class="input-lg">Your search location is: <span data-bind='text: query'> </span></p>
 			</div>
-			<p class="input-lg">Your search location is <span data-bind='text: query'> </span></p>
 		</div>
-	</div>
 
-	<div class="row">
-		<h4>Top Ramen Places in San Francisco</h4>
-		<ul data-bind="foreach: restaurants">
-			<li class="md-col-8">
-				<span data-bind="text: name"> </span> on
-				<span data-bind="text: address"> </span>
-			</li>
-		</ul>
-	</div>
+		<div class="row">
+			<div class="col-md-4">
+				<h4>Top Ramen Places in San Francisco</h4>
+				<ul data-bind="foreach: restaurants">
+					<li>
+						<span data-bind="text: name"> </span> on
+						<span data-bind="text: address"> </span>
+					</li>
+				</ul>
+			</div>
 
-	<!-- Display Google Maps -->
-	<div class="row">
-		<div id="map-canvas" class="col-md-12"></div>
+			<!-- Display Google Maps -->
+			<div class="col-md-8">
+				<div id="map-canvas" class="col-md-12"></div>
+			</div>
+		</div>
 	</div>
 
 	<!-- jQuery and KnockoutJS -->

@@ -54,6 +54,18 @@ var ViewModel = function() {
 
 	self.query = ko.observable("");
 
+	self.filteredRestaurants = ko.computed(function() {
+		var query = self.query().toLowerCase();
+		if (!query) {
+			return self.restaurants();
+		} else {
+			console.log(query);
+			return ko.utils.arrayFilter(self.restaurants(), function(item) {
+				console.log(item);
+				return ko.utils.stringStartsWith(item.name().toLowerCase(), filter); // uncaught type error: item.name() isn't a function
+			});
+		}
+	});
 };
 
 // Render Google Maps to HTML page

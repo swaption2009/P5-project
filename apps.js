@@ -62,7 +62,8 @@ var ViewModel = function() {
 			console.log(query);
 			return ko.utils.arrayFilter(self.restaurants(), function(item) {
 				console.log(item);
-				return ko.utils.stringStartsWith(item.name().toLowerCase(), filter); // uncaught type error: item.name() isn't a function
+				return self.restaurants.indexOf(query);
+				// return ko.utils.stringStartsWith(item.name().toLowerCase(), filter); // uncaught type error: item.name() isn't a function
 			});
 		}
 	});

@@ -9,7 +9,7 @@
 	<!-- Bootstrap -->
 	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-	<!-- Google Maps JavaScript API and Style -->
+	<!-- Google Maps JavaScript Style -->
 	<style>
 	html, body, #map-canvas {
 		height: 450px;
@@ -26,7 +26,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="form-group">
-					<input class="input-lg" style="width: 100%; margin-top: 20px" data-bind="value: query" placeholder="Search restaurant name or address">
+					<input class="input-lg" style="width: 100%; margin-top: 20px" data-bind="textInput: query" placeholder="Search restaurant name or address">
 				</div>
 				<p class="input-lg">Your search location is: <span data-bind='text: query'> </span></p>
 			</div>

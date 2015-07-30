@@ -12,14 +12,6 @@ var myList = [
 	{"name":"Ramen Yamadaya","address": "1728 Buchanan St.", "lat":37.786067, "long":-122.429653}
 ];
 
-// var Restaurant = function (name, address, lat, long) {
-// 	var self = this;
-// 	self.name = ko.observable(name);
-// 	self.address = ko.observable(address);
-// 	self.name = ko.observable(lat);
-// 	self.address = ko.observable(long);
-// };
-
 // Knockout ViewModel
 var ViewModel = function() {
 	var self = this;
@@ -30,12 +22,30 @@ var ViewModel = function() {
 	// console.log(self.restaurants()[0].name); // result: "Katana-Ya"
 	// console.log(self.restaurants().length); // result: 10
 
+	self.query = ko.observable("");
+
+	// var currentFilter = ko.observable();
+
+	self.filteredRestaurants = ko.computed(function() {
+		var query = self.query().toLowerCase();
+		if (!query) {
+			return self.restaurants();
+		} else {
+			// console.log(query);
+			return ko.utils.arrayFilter(self.restaurants(), function(item) {
+				// console.log(item.name);
+				return item.name.toLowerCase().indexOf(query) !== -1 || item.address.toLowerCase().indexOf(query) !== -1 ;
+			});
+		}
+	});
+
 	// Create marker from each restaurant's lat & long
-	for (var i = 0; i < self.restaurants().length; i ++) {
+	for (var i = 0; i < self.filteredRestaurants().length; i ++) {
+		console.log(self.filteredRestaurants()[i].lat);
 		// console.log(self.restaurants()[i].lat);
 		// console.log(self.restaurants()[i].long);
-		var lat = self.restaurants()[i].lat;
-		var long = self.restaurants()[i].long;
+		var lat = self.filteredRestaurants()[i].lat;
+		var long = self.filteredRestaurants()[i].long;
 
 		// start Google Map marker
 		var marker = new google.maps.Marker({
@@ -60,29 +70,6 @@ var ViewModel = function() {
 		}.bind(self));
 	}
 
-	self.query = ko.observable("");
-
-	var currentFilter = ko.observable();
-
-	ko.utils.stringStartsWith = function (string, startsWith) {
-		string = string || "";
-		if (startsWith.length > string.length)
-			return false;
-		return string.substring(0, startsWith.length) === startsWith;
-		};
-
-	self.filteredRestaurants = ko.computed(function() {
-		var query = self.query().toLowerCase();
-		if (!query) {
-			return self.restaurants();
-		} else {
-			// console.log(query);
-			return ko.utils.arrayFilter(self.restaurants(), function(item) {
-				// console.log(item.name);
-				return ko.utils.stringStartsWith(item.name.toLowerCase(), query);
-			});
-		}
-	});
 };
 
 // Render Google Maps to HTML page

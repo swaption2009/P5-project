@@ -16,15 +16,13 @@ var myList = [
 var ViewModel = function() {
 	var self = this;
 
-	// Preliminary data
+	// Get myList data to ViewModel
 	var restaurants = ko.observableArray();
 	self.restaurants = ko.observableArray(myList);
 	// console.log(self.restaurants()[0].name); // result: "Katana-Ya"
 	// console.log(self.restaurants().length); // result: 10
 
 	self.query = ko.observable("");
-
-	// var currentFilter = ko.observable();
 
 	self.filteredRestaurants = ko.computed(function() {
 		var query = self.query().toLowerCase();
@@ -34,13 +32,15 @@ var ViewModel = function() {
 			// console.log(query);
 			return ko.utils.arrayFilter(self.restaurants(), function(item) {
 				// console.log(item.name);
-				return item.name.toLowerCase().indexOf(query) !== -1 || item.address.toLowerCase().indexOf(query) !== -1 ;
+				var shownList = item.name.toLowerCase().indexOf(query) !== -1 || item.address.toLowerCase().indexOf(query) !== -1;
+				return shownList;
 			});
 		}
 	});
 
 	// Create marker from each restaurant's lat & long
 	for (var i = 0; i < self.filteredRestaurants().length; i ++) {
+		var pin;
 		console.log(self.filteredRestaurants()[i].lat);
 		// console.log(self.restaurants()[i].lat);
 		// console.log(self.restaurants()[i].long);
@@ -52,7 +52,8 @@ var ViewModel = function() {
 			position: new google.maps.LatLng(lat, long),
 			title: name,
 			map: map,
-			draggable: true
+			draggable: true,
+			animation: google.maps.Animation.DROP
 		});
 
 		//Make maps dragable

@@ -1,16 +1,24 @@
 // Non-editable data from server
 var myList = [
-	{"name":"Katana-Ya", "address":"430 Geary St.", "lat":"37.787285", "long":"-122.410464"},
-	{"name":"Izakaya Sozai", "address":"1500 Irving St.", "lat":"37.763847", "long":"-122.474121"},
-	{"name":"Genki Ramen","address": "3944 Geary Blvd.", "lat":"37.781361", "long":"-122.461898"},
-	{"name":"Tanpopo", "address":"1740 Buchanan St.", "lat":"37.786186", "long":"-122.429676"},
-	{"name":"Suzu Noodle House", "address":"1825 Post St.", "lat":"37.784942", "long":"-122.432057"},
-	{"name":"Saiwaii Ramen","address": "2240 Irving St.", "lat":"37.763520", "long":"-122.482179"},
-	{"name":"Mifune Restaurant", "address":"1737 Post St.", "lat":"37.785325", "long":"-122.430269"},
-	{"name":"Ajizen Ramen", "address":"865 Market St.", "lat":"37.783951", "long":"-122.407162"},
-	{"name":"Ken Ken Ramen","address": "3378 18th St.", "lat":"37.762103", "long":"-122.418744"},
-	{"name":"Ramen Yamadaya","address": "1728 Buchanan St.", "lat":"37.786067", "long":"-122.429653"}
+	{"name":"Katana-Ya", "address":"430 Geary St.", "lat":37.787285, "long":-122.410464},
+	{"name":"Izakaya Sozai", "address":"1500 Irving St.", "lat":37.763847, "long":-122.474121},
+	{"name":"Genki Ramen","address": "3944 Geary Blvd.", "lat":37.781361, "long":-122.461898},
+	{"name":"Tanpopo", "address":"1740 Buchanan St.", "lat":37.786186, "long":-122.429676},
+	{"name":"Suzu Noodle House", "address":"1825 Post St.", "lat":37.784942, "long":-122.432057},
+	{"name":"Saiwaii Ramen","address": "2240 Irving St.", "lat":37.763520, "long":-122.482179},
+	{"name":"Mifune Restaurant", "address":"1737 Post St.", "lat":37.785325, "long":-122.430269},
+	{"name":"Ajizen Ramen", "address":"865 Market St.", "lat":37.783951, "long":-122.407162},
+	{"name":"Ken Ken Ramen","address": "3378 18th St.", "lat":37.762103, "long":-122.418744},
+	{"name":"Ramen Yamadaya","address": "1728 Buchanan St.", "lat":37.786067, "long":-122.429653}
 ];
+
+// var Restaurant = function (name, address, lat, long) {
+// 	var self = this;
+// 	self.name = ko.observable(name);
+// 	self.address = ko.observable(address);
+// 	self.name = ko.observable(lat);
+// 	self.address = ko.observable(long);
+// };
 
 // Knockout ViewModel
 var ViewModel = function() {
@@ -54,16 +62,24 @@ var ViewModel = function() {
 
 	self.query = ko.observable("");
 
+	var currentFilter = ko.observable();
+
+	ko.utils.stringStartsWith = function (string, startsWith) {
+		string = string || "";
+		if (startsWith.length > string.length)
+			return false;
+		return string.substring(0, startsWith.length) === startsWith;
+		};
+
 	self.filteredRestaurants = ko.computed(function() {
 		var query = self.query().toLowerCase();
 		if (!query) {
 			return self.restaurants();
 		} else {
-			console.log(query);
+			// console.log(query);
 			return ko.utils.arrayFilter(self.restaurants(), function(item) {
-				console.log(item);
-				return self.restaurants.indexOf(query);
-				// return ko.utils.stringStartsWith(item.name().toLowerCase(), filter); // uncaught type error: item.name() isn't a function
+				// console.log(item.name);
+				return ko.utils.stringStartsWith(item.name.toLowerCase(), query);
 			});
 		}
 	});

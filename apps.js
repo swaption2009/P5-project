@@ -12,8 +12,9 @@ var myList = [
 	{"name":"Ramen Yamadaya","address": "1728 Buchanan St.", "lat":37.786067, "long":-122.429653, "yelpID":"ramen-yamadaya-san-francisco", "rating":null}
 ];
 
-
+// Set up Ajax call to Yelp Business API
 var buildYelpURL = function(myList) {
+	var ratings = [];
 	// Authenticate Yelp v2 API using oAuth2
 	var auth = {
 		consumerKey: "lZJQmQK1sk6Z0sxlJh0fkQ",
@@ -54,22 +55,29 @@ var buildYelpURL = function(myList) {
 		"url": message.action,
 		"data": parameterMap,
 		"dataType": "jsonp",
-		// "jsonpCallback": "cb",
 		"cache": true,
 		"success" : function(data, textStats, XMLHttpRequest) {
-			console.log(myList.name + " " + data.rating);
-			// $("body").append(data.rating);
+			// console.log(data);
+			var row = $("<tr />")
+			$(".table").append(row);
+			row.append($("<td>" + myList.name + "</td>"));
+			row.append($("<td>" + data.rating + "</td>"));
+			row.append($("<td>" + data.review_count + "</td>"));
+			row.append($("<td>" + data.display_phone + "</td>"));
 		}
 	});
 };
+
 // Get Yelp Rating
 var getYelpRating = function(myList) {
-	// console.log(myList);
+	// console.log(myList); // myList array
 	for (var i = 0; i < myList.length; i++) {
-		// console.log(myList[i]);
+		// console.log(myList[i]); // object of myList array
 		buildYelpURL(myList[i]);
 	}
 };
+
+// instantiate Ajax call
 getYelpRating(myList);
 
 
@@ -103,6 +111,7 @@ var ViewModel = function() {
 		long = self.filteredRestaurants()[i].long;
 		name = self.filteredRestaurants()[i].name;
 		address = self.filteredRestaurants()[i].address;
+		rating = self.filteredRestaurants()[i].rating;
 
 		contentString =
 			'<div class="container" style="width: 100%">' + 

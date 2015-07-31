@@ -39,19 +39,13 @@ var ViewModel = function() {
 	});
 
 	// Create marker from each restaurant's lat & long
-	for (var i = 0; i < self.filteredRestaurants().length; i ++) {
+	for (var i = 0; i < self.filteredRestaurants().length; i++) {
 		lat = self.filteredRestaurants()[i].lat;
 		long = self.filteredRestaurants()[i].long;
 		name = self.filteredRestaurants()[i].name;
 		address = self.filteredRestaurants()[i].address;
-		bizLink = "http://www.yelp.com/biz/" + self.filteredRestaurants()[i].yelpID;
-		console.log(bizLink);
-
-		// Create url link to Yelp website
-		var anchorElem = document.createElement('a');
-			anchorElem.setAttribute("href", bizLink);
-			anchorElem.innerHTML = yourLinkText;
-		document.body.appendChild(anchorElem);
+		// bizLink = "http://www.yelp.com/biz/" + self.filteredRestaurants()[i].yelpID;
+		// console.log(bizLink);
 
 		contentString =
 			'<div class="container" style="width: 100%">' + 

@@ -12,7 +12,6 @@ var myList = [
 	{"name":"Ramen Yamadaya","address": "1728 Buchanan St.", "lat":37.786067, "long":-122.429653, "yelpID":"ramen-yamadaya-san-francisco"}
 ];
 
-
 // Authenticate Yelp v2 API using oAuth2
 var auth = {
 	consumerKey: "lZJQmQK1sk6Z0sxlJh0fkQ",
@@ -24,8 +23,9 @@ var auth = {
 		}
 	};
 
-var terms = "food";
-var near = "San+Francisco";
+// var terms = "food";
+// var near = "San+Francisco";
+var business = myList[1].yelpID;
 
 var accessor = {
 	consumerSecret: auth.consumerSecret,
@@ -33,8 +33,9 @@ var accessor = {
 	};
 
 parameters = [];
-parameters.push(["term", terms]);
-parameters.push(["location", near]);
+// parameters.push(["term", terms]);
+// parameters.push(["location", near]);
+// parameters.push(["id", business]);
 parameters.push(["callback", 'cb']);
 parameters.push(["oauth_consumer_key", auth.consumerKey]);
 parameters.push(["oauth_consumer_secret", auth.consumerSecret]);
@@ -42,7 +43,7 @@ parameters.push(["oauth_token", auth.accessToken]);
 parameters.push(["oauth_signature_method", "HMAC-SHA1"]);
 
 var message = {
-	"action": 'http://api.yelp.com/v2/search',
+	"action": 'http://api.yelp.com/v2/business/' + business,
 	"method": 'GET',
 	"parameters" : parameters
 };
@@ -52,7 +53,7 @@ OAuth.setTimestampAndNonce(message);
 OAuth.SignatureMethod.sign(message, accessor);
 
 var parameterMap = OAuth.getParameterMap(message.parameters);
-console.log(parameterMap);
+// console.log(parameterMap);
 
 $.ajax({
 	"url": message.action,
@@ -99,6 +100,8 @@ var ViewModel = function() {
 		long = self.filteredRestaurants()[i].long;
 		name = self.filteredRestaurants()[i].name;
 		address = self.filteredRestaurants()[i].address;
+		id = self.filteredRestaurants()[i].yelpID;
+		console.log(id);
 		// bizLink = "http://www.yelp.com/biz/" + self.filteredRestaurants()[i].yelpID;
 		// console.log(bizLink);
 

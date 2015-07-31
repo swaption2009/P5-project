@@ -43,9 +43,16 @@ var ViewModel = function() {
 		lat = self.filteredRestaurants()[i].lat;
 		long = self.filteredRestaurants()[i].long;
 		name = self.filteredRestaurants()[i].name;
+		address = self.filteredRestaurants()[i].address;
 		// console.log(name);
 
-		contentString = name;
+		contentString =
+			'<div class="container" style="width: 100%">' + 
+				'<h4 class="text-uppercase"><strong>' + name + '</strong></h4>' +
+				'<p class="text-uppercase"><em>' + address + '</em></p>' +
+			'</div>';
+
+		// '<div class="container" style="width:400px">' + name + '</div>' + '</br>' + address;
 
 		// start Google Map marker
 		var marker = new google.maps.Marker({

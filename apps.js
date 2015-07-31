@@ -66,7 +66,7 @@ var ViewModel = function() {
 
 		var infowindow = new google.maps.InfoWindow({});
 
-		google.maps.event.addListener(marker, 'click', function(){
+		google.maps.event.addListener(marker, 'mouseover', function(){
 			infowindow.setContent(this.textWindow); 
 			infowindow.open(map,this);
 		});

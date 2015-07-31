@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-
 <html>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>P5-FEND</title>
 
-	<!-- Bootstrap -->
+	<!-- Load Bootstrap CSS -->
 	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-	<!-- Google Maps API -->
+	<!-- Google Maps API Style -->
 	<style>
 	html, body, #map-canvas {
 		height: 450px;
@@ -18,11 +16,6 @@
 		padding: 0;
 	}
 	</style>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJrU5NhnJmfvfSJ-VwDL4oWs2WzXIddMI"></script>
-
-	<!-- Yelp oAuth API -->
-	<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
-	<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 </head>
 
 <body>
@@ -32,7 +25,6 @@
 				<div class="form-group">
 					<input class="input-lg" style="width: 100%; margin-top: 20px" data-bind="textInput: query" placeholder="Search by restaurant name or address">
 				</div>
-<!-- 				<p class="input-lg">Your search location is: <span data-bind='text: query'> </span></p> -->
 			</div>
 		</div>
 
@@ -41,9 +33,8 @@
 				<h4>Top Ramen Places in San Francisco</h4>
 				<ul data-bind="foreach: filteredRestaurants">
 					<li>
-						<a data-bind="attr: {'href':  'http://www.yelp.com/biz/' + $data.yelpID}"} target="_blank"><span  data-bind="text: name"></span></a> on
-						<!-- <a href="http://www.yelp.com/biz/ramen-yamadaya-san-francisco" target="_blank"><span  data-bind="text: name"></span></a> on -->
-						<span data-bind="text: address"> </span>
+						<a data-bind="attr: {'href':  'http://www.yelp.com/biz/' + $data.yelpID}"} target="_blank"><span data-bind="text: name"></span></a> on
+						<span data-bind="text: address"></span>
 					</li>
 				</ul>
 			</div>
@@ -55,11 +46,15 @@
 		</div>
 	</div>
 
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJrU5NhnJmfvfSJ-VwDL4oWs2WzXIddMI"></script>
+	<!-- Yelp oAuth API -->
+	<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+	<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 	<!-- jQuery and KnockoutJS -->
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="bower_components/knockout/dist/knockout.js"></script>
 	<!-- apps.js -->
 	<script type="text/javascript" src="apps.js"></script>
-</body>
 
+</body>
 </html>

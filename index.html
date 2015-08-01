@@ -24,56 +24,50 @@
 			<div class="col-md-12">
 				<div class="col-md-6">
 					<div class="row">
-						<div class="col-md-8">
-							<div class="form-group">
-								<input class="input-lg" style="width: 100%; margin-top: 20px" data-bind="textInput: query" placeholder="Search by restaurant name or address">
-							</div>
+						<div class="form-group">
+								<input class="input-lg" style="width: 100%; margin-top: 20px" data-bind="textInput: query" placeholder="Live search by restaurant name or address">
 						</div>
 					</div>
 
 					<div class="row">
-						<div class="col-md-8">
-							<h4>Top Ramen Places in San Francisco</h4>
-							<ul data-bind="foreach: filteredRestaurants">
-								<li>
-									<a data-bind="attr: {'href':  'http://www.yelp.com/biz/' + $data.yelpID}"} target="_blank"><span data-bind="text: name"></span></a> on
-									<span data-bind="text: address"></span>
-								</li>
-							</ul>
-						</div>
+						<h3>Top Ramen Places in San Francisco</h3>
+						<p>KnockoutJS Implementation</p>
+						<ul data-bind="foreach: filteredRestaurants">
+							<li>
+								<a data-bind="attr: {'href':  'http://www.yelp.com/biz/' + $data.yelpID}"} target="_blank"><span data-bind="text: name"></span></a> on
+								<span data-bind="text: address"></span>
+							</li>
+						</ul>
 					</div>
 				</div>
 
 			<!-- Display Google Maps -->
 				<div class="col-md-6">
-					<h4>Google Maps InfoWindow</h4>
+					<h3>Restaurant Maps</h3>
+					<p>Hover markers to open InfoWindow</p>
 					<div id="map-canvas" class="col-md-12"></div>
 				</div>
 			</div>
 		</div>
 
 		<div class="row">
-			<h3>Restaurant Info</h3>
-				<p>Ajax and Yelp Business API Implementation</p>
+			<div class="col-md-12">
+				<h3>Restaurant Info</h3>
+				<p>Ajax Implementation (outside KnockoutJS)</p>
 				<table class="table">
 					<thead>
 						<tr>
 							<th>Name</th>
 							<th>Star Rating</th>
 							<th>Review Counts</th>
-							<th>Photo</th>
+							<th style="color:red">Call Now!</th>
 						</tr>
 					</thead>
 					<tbody>
 					</tbody>
 				</table>
-
-			<div class="col-lg-6">
-				<ul class="col-md-12" id="lists"></ul>
 			</div>
 		</div>
-	</div>
-
 	</div>
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJrU5NhnJmfvfSJ-VwDL4oWs2WzXIddMI"></script>

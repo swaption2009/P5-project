@@ -58,12 +58,13 @@ var buildYelpURL = function(myList) {
 		"cache": true,
 		"success" : function(data, textStats, XMLHttpRequest) {
 			// console.log(data);
-			var row = $("<tr />")
+			var phone = "<a href=tel:" + data.display_phone + "></a>";
+			var row = $("<tr />");
 			$(".table").append(row);
 			row.append($("<td>" + myList.name + "</td>"));
 			row.append($("<td>" + data.rating + "</td>"));
 			row.append($("<td>" + data.review_count + "</td>"));
-			row.append($("<td>" + data.display_phone + "</td>"));
+			row.append($("<td>" + "<a href=tel:" + data.display_phone + ">" + data.display_phone + "</a>" + "</td>"));
 		}
 	});
 };

@@ -2,6 +2,17 @@
 
 URL link to live website: [Click Here](http://swaption2009.github.io/P5-project/) 
 
+
+## Code Improvements
+
+1. Asynchronous Data Usage
+  * implement offline.js to notify User when browser is offline/online
+  * show AJAX error in console.log
+2. Code improvements
+  * "use strict";
+  * add var "len" for more efficient iteration (apps.js line 80)
+
+
 ## Implementations
 
 1. Install bower_components to load dependencies, ie. Bootstrap CSS and KnockoutJS

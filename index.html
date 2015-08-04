@@ -16,6 +16,20 @@
 		padding: 0;
 	}
 	</style>
+
+	<!-- Offline.js Implementation -->
+	<script src="bower_components/offline/offline.min.js"></script>
+	<link href="bower_components/offline/offline-theme-chrome.css" rel="stylesheet">
+	<link href="bower_components/offline/offline-language-english.css" rel="stylesheet">
+	<script>
+		Offline.options = {checks: {image: {url: 'https://placekitten.com/g/200/300'}, active: 'image'}}
+
+		var run = function(){
+			if (Offline.state === 'up')
+			Offline.check();
+		}
+		setInterval(run, 5000);
+	</script>
 </head>
 
 <body>

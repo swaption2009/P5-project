@@ -1,3 +1,5 @@
+"use strict";
+
 // Non-editable data from server
 var myList = [
 	{"name":"Katana-Ya", "address":"430 Geary St.", "lat":37.787285, "long":-122.410464, "yelpID":"katana-ya-san-francisco", "rating":null},
@@ -31,7 +33,7 @@ var buildYelpURL = function(myList) {
 		tokenSecret: auth.accessTokenSecret
 		};
 
-	parameters = [];
+	var parameters = [];
 	parameters.push(["callback", 'cb']);
 	parameters.push(["oauth_consumer_key", auth.consumerKey]);
 	parameters.push(["oauth_consumer_secret", auth.consumerSecret]);
@@ -108,13 +110,13 @@ var ViewModel = function() {
 
 	// Create marker from each restaurant's lat & long
 	for (var i = 0; i < self.filteredRestaurants().length; i++) {
-		lat = self.filteredRestaurants()[i].lat;
-		long = self.filteredRestaurants()[i].long;
-		name = self.filteredRestaurants()[i].name;
-		address = self.filteredRestaurants()[i].address;
-		rating = self.filteredRestaurants()[i].rating;
+		var lat = self.filteredRestaurants()[i].lat;
+		var long = self.filteredRestaurants()[i].long;
+		var name = self.filteredRestaurants()[i].name;
+		var address = self.filteredRestaurants()[i].address;
+		var rating = self.filteredRestaurants()[i].rating;
 
-		contentString =
+		var contentString =
 			'<div class="container" style="width: 100%">' + 
 				'<h4 class="text-uppercase"><strong>' + name + '</strong></h4>' +
 				'<p class="text-uppercase"><em>' + address + '</em></p>' +

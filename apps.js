@@ -58,8 +58,8 @@ var buildYelpURL = function(myList) {
 		"data": parameterMap,
 		"dataType": "jsonp",
 		"cache": true,
-		"success" : function(data, textStats, XMLHttpRequest) {
-			// console.log(data);
+		"success": function(data, textStats, XMLHttpRequest) {
+			// console.log(XMLHttpRequest.status);
 			var phone = "<a href=tel:" + data.display_phone + "></a>";
 			var row = $("<tr />");
 			$(".table").append(row);
@@ -67,6 +67,9 @@ var buildYelpURL = function(myList) {
 			row.append($("<td>" + data.rating + "</td>"));
 			row.append($("<td>" + data.review_count + "</td>"));
 			row.append($("<td>" + "<a href=tel:" + data.display_phone + ">" + data.display_phone + "</a>" + "</td>"));
+		},
+		"error": function(XMLHttpRequest) {
+			console.log(XMLHttpRequest);
 		}
 	});
 };
@@ -74,7 +77,7 @@ var buildYelpURL = function(myList) {
 // Get Yelp Rating
 var getYelpRating = function(myList) {
 	// console.log(myList); // myList array
-	for (var i = 0; i < myList.length; i++) {
+	for (var i = 0, len = myList.length; i < len; i++) {
 		// console.log(myList[i]); // object of myList array
 		buildYelpURL(myList[i]);
 	}
